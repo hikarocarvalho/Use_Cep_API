@@ -1,4 +1,4 @@
-# This Project is used to get the api "[Via Cep](https://viacep.com.br/)" and search one Address using the postcode from Brazil.
+# This Project is used to get the API "[Via Cep](https://viacep.com.br/)" and search one Address using the postcode from Brazil.
 
 ## The form used is like in this image:
 
@@ -6,15 +6,15 @@
 ![markdown][screen]
 
 
-### The project have two examples, but is the same example in real :
+### The project has two examples, but is the same example in real :
 
-#### The folder : open using a live server - use the index.js like a module and some browsers do not identify like a good thing read one javascript file like a module. But if you use the live server is ok. 
+#### The folder: open using a live server - use the index.js like a module and some browsers do not identify like a good thing read one javascript file like a module. But if you use the live server is ok. 
 
-#### The folder : open using with out a live server is the exact oposit from the other folder. You do not need use the live server because. The all code is in the same file index.js 
+#### The folder: open using without a live server is the exact opposite from the other folder. You do not need to use the live server because. All code is in the same file index.js 
 
 #### The index.js
 
-##### You have one object with all Brazilian states and the citys separed by state. 
+##### You have one object with all Brazilian states and the city's separated by state. 
 (obs: if you using the version to live server "this part of code is on locations.js")
 
 ``` js
@@ -5646,7 +5646,7 @@ const locations={
 }
 ```
 
-##### You have one list used to call the input elements form html 
+##### You have one list used to call the input elements from form in HTML 
 
 ```js
 const inputs={
@@ -5659,7 +5659,7 @@ const inputs={
 	}
 ```
 
-##### You have one arrow function to create options list 
+##### You have one arrow function to create an options list 
 (obs: this part is used to set the options in select elements)
 ```js
 const createOptions = (newValue,element)=>{
@@ -5669,7 +5669,7 @@ const createOptions = (newValue,element)=>{
 	element.appendChild(newOption);
 }	
 ```
-##### You have arrow functions to get and set the values from Api 
+##### You have arrow functions to get and set the values from API
 ```js
 const getValuesFromApi = async (postalNumber)=>{
 	let url = "https://viacep.com.br/ws/"+postalNumber+"/json/";
@@ -5696,7 +5696,7 @@ function getValues(event){
 	}
 }
 ```
-##### You have functions to set the values from api on html elements
+##### You have functions to set the values from API on HTML elements
 ```js
 // set list city
 const setListCity = (state)=>{
