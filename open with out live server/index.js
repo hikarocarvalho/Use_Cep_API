@@ -1,23 +1,6 @@
-# This Project is used to get the api "[Via Cep](https://viacep.com.br/)" and search one Address using the postcode from Brazil.
-
-## The form used is like in this image:
-
-[screen]:screen.png
-![markdown][screen]
-
-
-### The project have two examples, but is the same example in real :
-
-#### The folder : open using a live server - use the index.js like a module and some browsers do not identify like a good thing read one javascript file like a module. But if you use the live server is ok. 
-
-#### The folder : open using with out a live server is the exact oposit from the other folder. You do not need use the live server because. The all code is in the same file index.js 
-
-#### The index.js
-
-##### You have one object with all Brazilian states and the citys separed by state. 
-(obs: if you using the version to live server "this part of code is on locations.js")
-
-``` js
+const state = document.getElementById("state");
+const city = document.getElementById("city");
+// city and state list
 const locations={
     RO:[
         "Alta Floresta D´oeste",
@@ -5644,11 +5627,8 @@ const locations={
         "Brasília"
     ]
 }
-```
 
-##### You have one list used to call the input elements form html 
-
-```js
+// html elements
 const inputs={
 		postalCode:document.getElementById("postalCode"),
 		Street:document.getElementById("street"),
@@ -5657,20 +5637,30 @@ const inputs={
 		city:document.getElementById("city"),
 		state:document.getElementById("state"),
 	}
-```
-
-##### You have one arrow function to create options list 
-(obs: this part is used to set the options in select elements)
-```js
+// create options
 const createOptions = (newValue,element)=>{
 	const newOption = document.createElement("option");
 	newOption.setAttribute("value",newValue);
 	newOption.innerHTML = newValue.toLocaleUpperCase();
 	element.appendChild(newOption);
 }	
-```
-##### You have arrow functions to get and set the values from Api 
-```js
+// set list city
+const setListCity = (state)=>{
+	const cityList = locations[state].sort();
+	cityList.map((option)=>createOptions(option,city));
+}
+// get new city list
+const getNewCityList=()=>{
+	city.innerHTML="";
+	setListCity(state.value);
+}
+// set list states
+const setListStates=()=>{
+	const stateList = Object.keys(locations).sort();
+	stateList.map((option)=>createOptions(option,state));
+	getNewCityList();
+}
+// get values from api
 const getValuesFromApi = async (postalNumber)=>{
 	let url = "https://viacep.com.br/ws/"+postalNumber+"/json/";
 	const response = await fetch(url,{method:"GET"});
@@ -5695,23 +5685,9 @@ function getValues(event){
 		setAddressData(addressData,event);
 	}
 }
-```
-##### You have functions to set the values from api on html elements
-```js
-// set list city
-const setListCity = (state)=>{
-	const cityList = locations[state].sort();
-	cityList.map((option)=>createOptions(option,city));
+inputs.postalCode.addEventListener("keyup",getValues);
+//state.addEventListener("change",setListCity(state.value));
+if(state.value===""){
+	setListStates();
 }
-// get new city list
-const getNewCityList=()=>{
-	city.innerHTML="";
-	setListCity(state.value);
-}
-// set list states
-const setListStates=()=>{
-	const stateList = Object.keys(locations).sort();
-	stateList.map((option)=>createOptions(option,state));
-	getNewCityList();
-}
-```
+state.addEventListener("change",getNewCityList);
